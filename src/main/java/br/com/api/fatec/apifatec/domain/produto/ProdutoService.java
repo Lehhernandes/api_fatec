@@ -33,6 +33,21 @@ public class ProdutoService {
 		}
 		produtoRepository.deleteById(id);
 	}
+	public Produto atualizarProduto(Long id, Produto produto) {
+		Produto produtoCadastradoProduto = encontrarProdutoPorId(id);
+		
+		if (produtoCadastradoProduto == null)
+		{
+			return null;
+		} else {
+			produtoCadastradoProduto.setDescricao(produto.getDescricao());
+			produtoCadastradoProduto.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+			produtoCadastradoProduto.setPreco(produto.getPreco());
+			produtoCadastradoProduto.setAtivo(produto.getAtivo());
+			return produtoRepository.save(produtoCadastradoProduto);
+		}
+	}
+	
 	
 
 }
