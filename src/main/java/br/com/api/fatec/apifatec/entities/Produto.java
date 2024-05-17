@@ -1,4 +1,7 @@
 package br.com.api.fatec.apifatec.entities;
+
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,31 +12,26 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "produtos")
 public class Produto {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false, length = 60)
 	private String descricao;
-	
-	@Column(nullable = false, length = 8)
-	private double preco;
-	
-	@Column(name = "quantidade_estoque", nullable = false)
-	private int quantidadeEstoque;
+
+	@Column(nullable = false, precision = 12, scale = 3)
+	private BigDecimal preco;
+
+	@Column(name = "quantidade_estoque")
+	private Integer quantidadeEstoque;
 	
 	@Column()
-	private boolean ativo;
+	private String ativo;
 	
-	
-	
-	// get e set
-
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -46,31 +44,27 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
-	public int getQuantidadeEstoque() {
+	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
 
-	public void setQuantidadeEstoque(int quantidadeEstoque) {
+	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
-	public boolean getAtivo() {
+	public String getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(String ativo) {
 		this.ativo = ativo;
-	}	
-	
-	
-	
+	}
 }
-

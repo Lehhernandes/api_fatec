@@ -1,11 +1,10 @@
 package br.com.api.fatec.apifatec.domain.cliente;
 
-import java.util.List;
-
+import br.com.api.fatec.apifatec.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.api.fatec.apifatec.entities.Cliente;
+import java.util.List;
 
 @Service
 public class ClienteService {
@@ -28,9 +27,9 @@ public class ClienteService {
 		Cliente cliente = encontrarClientePorId(id);
 		
 		if(cliente == null)
-		{
-			throw new IllegalArgumentException("Cliente não encontrado.");
-		}
+			throw new IllegalArgumentException("Cliente nao existe");
+		
+		
 		clienteRepository.deleteById(id);
 	}
 	
@@ -47,5 +46,13 @@ public class ClienteService {
 			clienteCadastradoCliente.setEndereco(cliente.getEndereco());
 			return clienteRepository.save(clienteCadastradoCliente);
 		}
+	}
+
+	public List<Cliente> buscarPorNome(String nome) {
+		//Forma 1
+		return clienteRepository.findByNomeContainingIgnoreCase(nome);
+
+		//Forma 2
+		//return clienteRepository.findByNome(nome);
 	}
 }

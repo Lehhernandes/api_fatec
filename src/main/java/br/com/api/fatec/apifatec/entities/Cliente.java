@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "clientes")
@@ -14,24 +15,30 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false, length = 60)
 	private String nome;
-	
+
 	@Column(name = "razao_social", length = 60, nullable = false)
 	private String razaoSocial;
-	
+
 	@Column()
 	private String endereco;
-	
-	@Column()
-	private String email;
-	
-	
-	// get e set
 
+	@Column()
+	@Email
+	private String email;
+
+	
+	
+	
+	// Getters e setters
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -64,8 +71,5 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}	
-	
-	
-	
+	}
 }

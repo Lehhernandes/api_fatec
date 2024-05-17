@@ -11,43 +11,41 @@ import br.com.api.fatec.apifatec.entities.Produto;
 public class ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	public List<Produto> listarProdutos() {
 		return produtoRepository.findAll();
 	}
-	
+
 	public Produto encontrarProdutoPorId(Long id) {
 		return produtoRepository.findById(id).orElse(null);
 	}
-	
-	public Produto salvarProduto(Produto produto) {
-		return produtoRepository.save(produto);
+
+	public Produto salvarProduto(Produto Produto) {
+		return produtoRepository.save(Produto);
 	}
-	
+
 	public void deletarProduto(Long id) {
-		Produto produto = encontrarProdutoPorId(id);
+		Produto Produto = encontrarProdutoPorId(id);
 		
-		if(produto == null)
-		{
-			throw new IllegalArgumentException("Cliente não encontrado.");
-		}
+		if(Produto == null)
+			throw new IllegalArgumentException("Produto nao existe");
+		
+		
 		produtoRepository.deleteById(id);
 	}
+	
 	public Produto atualizarProduto(Long id, Produto produto) {
-		Produto produtoCadastradoProduto = encontrarProdutoPorId(id);
+		Produto ProdutoCadastrado = encontrarProdutoPorId(id);
 		
-		if (produtoCadastradoProduto == null)
+		if (ProdutoCadastrado == null)
 		{
 			return null;
 		} else {
-			produtoCadastradoProduto.setDescricao(produto.getDescricao());
-			produtoCadastradoProduto.setQuantidadeEstoque(produto.getQuantidadeEstoque());
-			produtoCadastradoProduto.setPreco(produto.getPreco());
-			produtoCadastradoProduto.setAtivo(produto.getAtivo());
-			return produtoRepository.save(produtoCadastradoProduto);
+			ProdutoCadastrado.setDescricao(produto.getDescricao());
+			ProdutoCadastrado.setPreco(produto.getPreco());
+			ProdutoCadastrado.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+			ProdutoCadastrado.setAtivo(produto.getAtivo());
+			return produtoRepository.save(ProdutoCadastrado);
 		}
 	}
-	
-	
-
 }
